@@ -1,6 +1,6 @@
 package org.macalester.edu.comp124.lists;
 
-
+import java.lang.String;
 /**
  * An unfinished implementation of an array-based List.
  *
@@ -47,7 +47,7 @@ public class MyArrayList<E> {
 	 * @return
 	 */
 	public E get(int index) {
-        return null;    // replace this line with the correct code.
+        return elements[index];    // replace this line with the correct code.
 	}
 	
 	/**
@@ -60,7 +60,13 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(E elem) {
-	}
+        if (elements.length == currentSize) {
+            expandSize();
+        }
+        elements[currentSize] = elem;
+        currentSize++;
+    }
+
 
 	/**
 	 * Inserts a new element at the specified index.
@@ -74,6 +80,15 @@ public class MyArrayList<E> {
 	 * @param elem
 	 */
 	public void add(int index, E elem) {
+        if (elements.length == currentSize) {
+            expandSize();
+        }
+        elements[index] = elem;
+            for (int i = index; i <= currentSize; i++) {
+                elements[index] = elements[index + 1];
+                currentSize = i;
+            }
+
 	}
 	
 	/**
@@ -85,6 +100,14 @@ public class MyArrayList<E> {
      * Hint: use newArrayOfE!
 	 */
 	private void expandSize() {
+        
+        int origLength = elements.length;
+        E[] origElements = elements;[];
+        elements = newArrayOfE(elements.length * 2);
+        for (int i = 0; i < origLength; i++) {
+            origElements[i] = elements[i];
+        }
+        
 	}
 	
 	/**
